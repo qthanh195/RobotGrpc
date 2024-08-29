@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package robot;
+
+service Robot{
+    rpc Connect(ConnectRequest) returns (StateResponse){}
+    rpc Disconnect(EmptyRequest) returns (StateResponse){}
+    rpc RunBuffMidsole(BuffMidsoleRequest) returns (StateResponse){}
+
+    rpc PowerOn(EmptyRequest) returns (StateResponse){}
+    rpc PowerOff(EmptyRequest) returns (StateResponse){}
+    rpc Enable(EmptyRequest) returns (StateResponse){}
+    rpc Disable(EmptyRequest) returns (StateResponse){}
+    rpc Shutdown(EmptyRequest) returns (StateResponse){}
+    rpc Pause(EmptyRequest) returns (StateResponse){}
+    rpc Resume(EmptyRequest) returns (StateResponse){}
+    rpc Stop(EmptyRequest) returns (StateResponse){}
+    
+    rpc MoveHome(EmptyRequest) returns (StateResponse){}
+    rpc LoadProgram(LoadProgramRequest) returns (LoadProgramResponse){}
+    rpc RunProgram(EmptyRequest) returns (StateResponse){}
+    rpc MoveTCP(MoveTCPRequest) returns (StateResponse){}
+
+    rpc SetIO(IORequest) returns (StateResponse){}
+    rpc GetProgramState(EmptyRequest) returns (ProgramStateResponse){}
+    rpc Abortprogram(EmptyRequest) returns (StateResponse){}
+    rpc GetPos(EmptyRequest) returns (PosResponse){}
+    rpc SetToolId(ToolIdRequest) returns (StateResponse){}
+    rpc GetToolId(EmptyRequest) returns (ToolIdResponse){}
+    rpc SetCoordinateId(CoordinateIdRequest) returns (StateResponse){}
+    rpc GetCoordinateId(EmptyRequest) returns (CoordinateIdResponse){}
+}
+
+message EmptyRequest{}
+message StateResponse{
+    string state = 1;
+}
+message LoadProgramRequest{
+    string nameProgram = 1;
+}
+message LoadProgramResponse{
+    string state = 1;
+    string nameProgram = 2;
+}
+message MoveTCPRequest{
+    string pos = 1;
+}
+message IORequest{
+    int32 pin = 1;
+    bool ioState = 2;
+}
+message ProgramStateResponse{
+    string state = 1;
+    string programState = 2;
+}
+message PosResponse{
+    string state = 1;
+    string pos = 2;
+}
+message ToolIdRequest{
+    int32 toolId = 1;
+}
+message ToolIdResponse{
+    string state = 1;
+    int32 toolId = 2;
+}
+message CoordinateIdRequest{
+    int32 coordinateId = 1;
+}
+message CoordinateIdResponse{
+    string state = 1;
+    int32 coordinateId = 2;
+}
+message ConnectRequest{
+    string ip = 1;
+}
+message BuffMidsoleRequest{
+    string pos = 1;
+    bool dir = 2;
+}
